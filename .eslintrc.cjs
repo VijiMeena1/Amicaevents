@@ -17,7 +17,8 @@ module.exports = {
       { allowConstantExport: true },
     ],
     "react/jsx-uses-vars": "error",
-    "react/jsx-uses-react": "error"
+    "react/jsx-uses-react": "error",
   },
-  
+  "extends": "next/core-web-vitals",
+  "rules": { "react/no-unescaped-entities": 0 }
 }
