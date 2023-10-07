@@ -2,7 +2,8 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div>
+    <div  data-aos="fade-up"
+    data-aos-duration="2000">
       <div className="bg-[#121212] w-full">
         <div className="flex flex-col items-center justify-center gap-8 md:gap-12 py-12 md:py-20 lg:py-24 px-5">
           <div>
