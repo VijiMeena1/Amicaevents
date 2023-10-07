@@ -43,9 +43,9 @@ sum(1, "2");
 <details><summary><b>Answer</b></summary>
 <p>
 
-#### Answer: ?
+#### Answer: C
 
-<i>Write your explanation here</i>
+<i>The output is `12` because the `sum` function implicitly converts the number `1` to a string when it is concatenated with the string `2`. In JavaScript, when the `+` operator encounters a string and a number, it converts the number to a string and performs string concatenation. Therefore, the numeric addition operation is treated as string concatenation, resulting in the combined string `12`.</i>
 
 </p>
 </details>
@@ -69,9 +69,9 @@ console.log(food);
 <details><summary><b>Answer</b></summary>
 <p>
 
-#### Answer: ?
+#### Answer: A
 
-<i>Write your explanation here</i>
+<i>The `info.favoriteFood` property is initially assigned the value of the first element in the food array, which is "🍕". However, when the subsequent assignment info.favoriteFood = "🍝" is made, it only modifies the property within the info object and does not affect the original food array. Therefore, when `console.log(food)` is executed, the output will be ["🍕", "🍫", "🥑", "🍔"].</i>
 
 </p>
 </details>
@@ -94,9 +94,9 @@ console.log(sayHi());
 <details><summary><b>Answer</b></summary>
 <p>
 
-#### Answer: ?
+#### Answer: B
 
-<i>Write your explanation here</i>
+<i>The `sayHi` function is designed to take a `name` parameter, but when called without an argument, it defaults to `undefined`. Consequently, the returned string includes "Hi there, undefined" as the output when `console.log(sayHi())` is executed.</i>
 
 </p>
 </details>
@@ -122,9 +122,9 @@ console.log(count);
 <details><summary><b>Answer</b></summary>
 <p>
 
-#### Answer: ?
+#### Answer: C
 
-<i>Write your explanation here</i>
+<i>The code initializes a `count` variable to `0` and iterates through the `nums` array using `forEach`. The condition `if (num)` checks for truthiness, incrementing `count` for each non-zero element. As there are three non-zero elements (`1`, `2`, and `3`), the final output is `3` when `console.log(count)` is executed.</i>
 
 </p>
 </details>
