@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="bg-[#121212] w-full">
         <div className="flex flex-col items-center justify-center gap-8 md:gap-12 py-12 md:py-20 lg:py-24 px-5">
           <div>
-            <p className="text-center font-bold text-4xl md:text-5xl text-white font-serif">
+            <p className="text-center font-bold text-3xl md:text-5xl text-white font-serif">
               EventCraft<span className="text-[#00A4EF]">Hub</span>
             </p>
           </div>
@@ -33,7 +33,7 @@ export default function Footer() {
               </ul>
             </div>
             <div>
-            <ul className="flex flex-wrap items-center  font-medium  justify-center gap-8 md:gap-10 lg:gap-14 text-white text-3xl md:text-4xl grid-flow-col">
+            <ul className="flex flex-wrap items-center  font-medium  justify-center gap-8 md:gap-10 lg:gap-14 text-white text-2xl md:text-4xl grid-flow-col">
               <li>
                 <a href="#">
                   <ion-icon name="logo-facebook"></ion-icon>
@@ -66,7 +66,7 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-          <span className="flex justify-center text-base text-white">
+          <span className="text-center text-white">
             © 2023 EventCraftHub. All Rights Reserved.
           </span>
             </div>

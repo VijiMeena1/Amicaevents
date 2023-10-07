@@ -13,9 +13,9 @@ const Navbar = () => {
   return (
     <nav className="p-5 bg-white shadow lg:flex lg:items-center lg:justify-between">
       <div className="flex justify-between items-center">
-        <span className="text-2xl md:text-3xl font-extrabold cursor-pointer">
+        <Link to='/'><span className="text-2xl md:text-3xl font-extrabold cursor-pointer">
         EventCraft<span className='text-[#00A4EF]'>Hub</span>
-        </span>
+        </span></Link>
 
         <span className="text-3xl cursor-pointer mx-2 lg:hidden block">
           <ion-icon name={menuIcon} onClick={toggleMenu}></ion-icon>
@@ -24,24 +24,24 @@ const Navbar = () => {
 
       <div>
       <ul
-        className={`lg:flex lg:items-center z-[-1] lg:z-auto lg:static absolute bg-white w-full left-0 lg:w-auto lg:py-0 py-4 lg:pl-0 pl-7 lg:opacity-100 ${menuVisible ? 'opacity-100 top-[80px]' : 'opacity-0 top-[-400px]'} transition-all ease-in duration-500`}
+        className={`lg:flex lg:items-center z-50 lg:z-auto lg:static absolute bg-white w-full left-0 lg:w-auto lg:py-0 py-4 lg:pl-0 pl-7 lg:opacity-100 ${menuVisible ? 'opacity-100 top-[80px]' : 'opacity-0 top-[-400px]'}`}
       >
         <NavLink to="/" className={(navData) => (navData.isActive ? "active" : 'null')}>
-            <li className="mx-4 my-6 md:my-0 text-xl hover:text-cyan-500 duration-500">Home</li>
+            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Home</li>
         </NavLink>
-        <NavLink to="/home" className={(navData) => (navData.isActive ? "active" : 'null')}>
-            <li className="mx-4 my-6 md:my-0 text-xl hover:text-cyan-500 duration-500">Services</li>
+        <NavLink to="/" className={(navData) => (navData.isActive ? "active" : 'null')}>
+            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Services</li>
         </NavLink>
-        <NavLink to="/home" className={(navData) => (navData.isActive ? "active" : 'null')}>
-            <li className="mx-4 my-6 md:my-0 text-xl hover:text-cyan-500 duration-500">Categories</li>
+        <NavLink to="/" className={(navData) => (navData.isActive ? "active" : 'null')}>
+            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Categories</li>
         </NavLink>
-        <NavLink to="/home" className={(navData) => (navData.isActive ? "active" : 'null')}>
-            <li className="mx-4 my-6 md:my-0 text-xl hover:text-cyan-500 duration-500">Blog</li>
+        <NavLink to="/" className={(navData) => (navData.isActive ? "active" : 'null')}>
+            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Blog</li>
         </NavLink>
-        <NavLink to="/home" className={(navData) => (navData.isActive ? "active" : 'null')}>
-            <li className="mx-4 my-6 md:my-0 text-xl hover:text-cyan-500 duration-500">Contact</li>
+        <NavLink to="/" className={(navData) => (navData.isActive ? "active" : 'null')}>
+            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Contact</li>
         </NavLink>
-        <button className="bg-cyan-400 text-white duration-500 px-6 text-lg py-2 mx-4 hover:bg-cyan-500 rounded-lg">
+        <button className="bg-cyan-400 text-white duration-500 px-6 text-lg py-2 mx-4 hover:bg-cyan-500 rounded-lg mb-4 lg:mb-0">
           Login
         </button>
       </ul>
