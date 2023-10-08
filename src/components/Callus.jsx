@@ -10,7 +10,7 @@ const Callus = () => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center gap-4 lg:gap-5 px-4 lg:px-8 text-white text-center' style={divStyle}>
+    <div className='flex flex-col items-center justify-center gap-4 lg:gap-5 px-4 lg:px-8 text-white text-center' style={divStyle} data-aos="fade-right">
       <h2 className='text-xl md:text-2xl lg:text-4xl xl:text-5xl font-semibold'>EventCraftHub is ready to give you a wonderful service</h2>
       <p className='text-sm lg:text-lg italic'>Would love to talk to you, contact us any way you feel comfortable, we'll be waiting</p>
       <div className='flex items-center justify-center gap-5'>

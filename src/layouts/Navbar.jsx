@@ -29,14 +29,11 @@ const Navbar = () => {
         <NavLink to="/" className={(navData) => (navData.isActive ? "active" : 'null')}>
             <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Home</li>
         </NavLink>
-        <NavLink to="/services" className={(navData) => (navData.isActive ? "active" : 'null')}>
-            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Services</li>
-        </NavLink>
         <NavLink to="/categories" className={(navData) => (navData.isActive ? "active" : 'null')}>
             <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Categories</li>
         </NavLink>
-        <NavLink to="/blog" className={(navData) => (navData.isActive ? "active" : 'null')}>
-            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Blog</li>
+        <NavLink to="/services" className={(navData) => (navData.isActive ? "active" : 'null')}>
+            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Services</li>
         </NavLink>
         <NavLink to="/contactus" className={(navData) => (navData.isActive ? "active" : 'null')}>
             <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Contact</li>
