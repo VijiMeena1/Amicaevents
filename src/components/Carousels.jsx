@@ -39,7 +39,7 @@ export default function Carousels() {
           />
         ))}
       </Carousel>
-      <div className="absolute top-10 lg:top-[35%] flex flex-col items-center justify-center gap-2 lg:gap-8 mx-10">
+      <div className="absolute top-10 md:top-20 lg:top-[35%] flex flex-col items-center justify-center gap-2 lg:gap-8 mx-10">
         <h2 className="text-white drop-shadow-lg text-xl md:text-3xl lg:text-5xl text-center font-bold">
           Welcome to Unforgettable Moments: Your Premier Event Management
           Experience

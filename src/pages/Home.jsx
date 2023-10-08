@@ -5,6 +5,7 @@ import Contactus from '../components/Contactus'
 import Callus from '../components/Callus'
 import Services from '../layouts/Services'
 import Categories from '../components/Categories'
+import Newsletter from '../layouts/Newsletter'
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <Categories/>
       <Callus/>
       <Services/>
+      <Newsletter/>
       <Contactus/>
     </div>
   )

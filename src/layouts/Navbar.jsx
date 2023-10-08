@@ -27,16 +27,16 @@ const Navbar = () => {
         className={`lg:flex lg:items-center z-[100] lg:z-auto lg:static absolute bg-white w-full left-0 lg:w-auto lg:py-0 py-4 lg:pl-0 pl-7 lg:opacity-100 ${menuVisible ? 'opacity-100 top-[75px] border-t-2' : 'opacity-0 top-[-400px]'}`}
       >
         <NavLink to="/" className={(navData) => (navData.isActive ? "active" : 'null')}>
-            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Home</li>
+            <li className="mx-4 my-4 text-xl hover:text-cyan-500 duration-500">Home</li>
         </NavLink>
         <NavLink to="/categories" className={(navData) => (navData.isActive ? "active" : 'null')}>
-            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Categories</li>
+            <li className="mx-4 my-4 text-xl hover:text-cyan-500 duration-500">Categories</li>
         </NavLink>
         <NavLink to="/services" className={(navData) => (navData.isActive ? "active" : 'null')}>
-            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Services</li>
+            <li className="mx-4 my-4 text-xl hover:text-cyan-500 duration-500">Services</li>
         </NavLink>
         <NavLink to="/contactus" className={(navData) => (navData.isActive ? "active" : 'null')}>
-            <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Contact</li>
+            <li className="mx-4 my-4 text-xl hover:text-cyan-500 duration-500">Contact</li>
         </NavLink>
         <NavLink to='/login'>
         <button className="bg-cyan-400 text-white duration-500 px-6 text-lg py-2 mx-4 hover:bg-cyan-500 rounded-lg mb-4 lg:mb-0">

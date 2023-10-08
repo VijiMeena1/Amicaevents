@@ -7,6 +7,8 @@ import Contactus from "../components/Contactus";
 import Services from "../layouts/Services";
 import Categories from "../components/Categories";
 import Login from "../components/Login";
+import Signup from "../components/Signup";
+import Card from "../components/Card";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +35,20 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <Login/>,
+            },
+            {
+                path: '/signup',
+                element: <Signup/>,
+            },
+            {
+              path: '/service-details/:title_id',
+              element:<Card/>, 
+              loader: async ({ params }) => {
+                const response = await fetch('/service.json');
+                const data = await response.json();
+                const cardData = data.find((item) => item.title_id === params.title_id);
+                return { data: cardData };
+              }
             }
 
         ]
