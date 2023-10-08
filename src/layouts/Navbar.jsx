@@ -24,7 +24,7 @@ const Navbar = () => {
 
       <div>
       <ul
-        className={`lg:flex lg:items-center z-50 lg:z-auto lg:static absolute bg-white w-full left-0 lg:w-auto lg:py-0 py-4 lg:pl-0 pl-7 lg:opacity-100 ${menuVisible ? 'opacity-100 top-[80px]' : 'opacity-0 top-[-400px]'}`}
+        className={`lg:flex lg:items-center z-[100] lg:z-auto lg:static absolute bg-white w-full left-0 lg:w-auto lg:py-0 py-4 lg:pl-0 pl-7 lg:opacity-100 ${menuVisible ? 'opacity-100 top-[75px] border-t-2' : 'opacity-0 top-[-400px]'}`}
       >
         <NavLink to="/" className={(navData) => (navData.isActive ? "active" : 'null')}>
             <li className="mx-4 my-4 md:my-0 text-xl hover:text-cyan-500 duration-500">Home</li>
