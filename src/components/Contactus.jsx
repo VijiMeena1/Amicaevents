@@ -1,11 +1,7 @@
 import React from 'react'
-import { Helmet } from 'react-helmet-async'
 export default function Contactus() {
   return (
     <div data-aos="fade-right">
-            <Helmet>
-        <title>We're Here for You: Contact Our Event Team Today</title>
-      </Helmet>
       <section className="bg-white">
       <div className="container px-6 py-12 mx-auto">
         <div className='text-center'>
@@ -20,8 +16,8 @@ export default function Contactus() {
         </div>
 
         <div className="grid grid-cols-1 gap-12 mt-10 lg:grid-cols-2">
-          <div className="grid grid-cols-1 gap-12 md:grid-cols-2">
-            <div className='flex flex-col items-center justify-center'>
+          <div className="grid grid-cols-1 gap-12 md:gap-8 md:grid-cols-2">
+            <div className='flex flex-col items-center justify-center bg-gray-50 rounded-lg py-10 lg:py-0 px-2'>
               <span className="inline-block p-3 text-blue-500 rounded-full bg-blue-100/80">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +45,7 @@ export default function Contactus() {
               </p>
             </div>
 
-            <div className='flex flex-col items-center justify-center'>
+            <div className='flex flex-col items-center justify-center bg-gray-50 rounded-lg py-10 lg:py-0 px-2'>
               <span className="inline-block p-3 text-blue-500 rounded-full bg-blue-100/80">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +76,7 @@ export default function Contactus() {
               <p className="mt-2 text-sm text-blue-500">Start new chat</p>
             </div>
 
-            <div className='flex flex-col items-center justify-center'>
+            <div className='flex flex-col items-center justify-center bg-gray-50 rounded-lg py-10 lg:py-0 px-2'>
               <span className="inline-block p-3 text-blue-500 rounded-full bg-blue-100/80">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +109,7 @@ export default function Contactus() {
               </p>
             </div>
 
-            <div className='flex flex-col items-center justify-center'>
+            <div className='flex flex-col items-center justify-center bg-gray-50 rounded-lg py-10 lg:py-0 px-2'>
               <span className="inline-block p-3 text-blue-500 rounded-full bg-blue-100/80">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

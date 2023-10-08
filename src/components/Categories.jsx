@@ -2,9 +2,13 @@ import React from 'react'
 
 export default function Categories() {
   return (
-    <div className='py-10 mt-5 md:mt-0 md:py-16' data-aos="zoom-in">
-        <div className='flex flex-col items-center justify-center gap-10 lg:gap-14'>
+    <div className='py-10 md:py-16' data-aos="zoom-in">
+        <div className='flex flex-col items-center justify-center gap-6 lg:gap-10'>
+            <div className='container mx-auto'>
             <h2 className='text-center text-3xl md:text-4xl lg:text-5xl font-semibold'>Categories</h2>
+            <hr className="my-8 mx-5 lg:mx-0 border-gray-200" />
+            </div>
+            
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 md:gap-10 lg:gap-14'>
                 <div className='flex flex-col items-center justify-center gap-4'>
                     <span className='text-5xl hover:text-[#00A4EF]'><ion-icon name="gift-outline"></ion-icon></span>
