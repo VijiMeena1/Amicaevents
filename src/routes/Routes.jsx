@@ -6,6 +6,7 @@ import ErrorPage from "../components/Errorpage";
 import Contactus from "../components/Contactus";
 import Services from "../layouts/Services";
 import Categories from "../components/Categories";
+import Login from "../components/Login";
 
 const router = createBrowserRouter([
     {
@@ -25,10 +26,13 @@ const router = createBrowserRouter([
                 path: '/services',
                 element: <Services/>,
             },
-            ,
             {
                 path: '/categories',
                 element: <Categories/>,
+            },
+            {
+                path: '/login',
+                element: <Login/>,
             }
 
         ]

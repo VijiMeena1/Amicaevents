@@ -42,7 +42,7 @@ export default function Services() {
         {loading ? (
           <p className="text-center font-semibold text-xl">Loading...</p>
         ) : (
-          <div className="grid grid-cols-1 gap-8 lg:gap-12 md:grid-cols-2 xl:grid-cols-3 mt-8 lg:mt-12">
+          <div className="grid grid-cols-1 gap-8 lg:gap-12 md:grid-cols-2 xl:grid-cols-3 mt-8 lg:mt-10">
             {servicesData.map((service) => (
               <div key={service.id}>
                 <img
