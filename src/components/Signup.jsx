@@ -85,7 +85,7 @@ export default function Signup() {
                     required
                   />
                 </div>
-                <div className="flex items-center gap-1">
+                <div>
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
                       <input
@@ -96,18 +96,14 @@ export default function Signup() {
                         required
                       />
                     </div>
-                    <div className="ml-3 text-sm">
+                    <div className="ml-3 text-xs md:text-sm">
                       <label htmlFor="remember" className="text-gray-500">
-                      I accept the
+                      I accept the {" "}
                       </label>
+                      <a href="#" className="text-sm font-medium text-[#3b82f6] hover:underline">Terms and Conditions</a>
                     </div>
                   </div>
-                  <a
-                    href="#"
-                    className="text-sm font-medium text-[#3b82f6] hover:underline"
-                  >
-                    Terms and Conditions
-                  </a>
+
                 </div>
                 <button
                   type="submit"
@@ -118,7 +114,7 @@ export default function Signup() {
 
                 <button
                   type="submit"
-                  className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-2.5 text-center"
+                  className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-2 md:py-2.5 text-center"
                 >
                   <div className="flex items-center justify-center gap-2">
                     <span>
@@ -129,7 +125,7 @@ export default function Signup() {
                 </button>
                 <button
                   type="submit"
-                  className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-3.5 text-center"
+                  className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-2.5 md:py-3.5 text-center"
                 >
                   <div className="flex items-center justify-center gap-2">
                     <span>

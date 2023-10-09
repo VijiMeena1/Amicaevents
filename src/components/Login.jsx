@@ -86,7 +86,7 @@ export default function Login() {
 
                 <button
                   type="submit"
-                  className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-2.5 text-center"
+                  className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-2 md:py-2.5 text-center"
                 >
                   <div className="flex items-center justify-center gap-2">
                     <span>
@@ -97,7 +97,7 @@ export default function Login() {
                 </button>
                 <button
                   type="submit"
-                  className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-3.5 text-center"
+                  className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-2.5 md:py-3.5 text-center"
                 >
                   <div className="flex items-center justify-center gap-2">
                     <span>
