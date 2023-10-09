@@ -8,15 +8,15 @@ export default function Carousels() {
   useEffect(() => {
     const fetchSlides = async () => {
       try {
-        const response = await fetch("/slides.json");
+        const response = await fetch("/photo.json");
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         const data = await response.json();
-        setSlides(data);
+        setSlides(data.slides);
       } catch (error) {
-        console.error("Error fetching slides.json:", error);
+        console.error("Error fetching photo.json:", error);
       }
     };
 
@@ -30,11 +30,11 @@ export default function Carousels() {
         onMouseEnter={() => setIsMouseOver(true)}
         onMouseLeave={() => setIsMouseOver(false)}
       >
-        {slides.map((slide) => (
+        {slides.map((slide, index) => (
           <img
-            key={slide.id}
-            src={slide["image-url"]}
-            alt={`image ${slide.id}`}
+            key={index}
+            src={slide}
+            alt={`slide-${index}`}
             className="h-[20rem] lg:h-[40rem] w-full object-cover"
           />
         ))}

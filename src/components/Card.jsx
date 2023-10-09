@@ -41,7 +41,7 @@ export default function Card() {
         <h1 className="text-gray-900 text-2xl md:text-3xl title-font font-medium mb-1 md:mb-3">{title}</h1>
         <div className="flex mb-4">
           <div className="flex items-center">
-            <div className='text-lg lg:text-xl text-[#00A4EF]'>
+            <div className='text-lg md:text-xl text-[#00A4EF]'>
             <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>
           <ion-icon name="star"></ion-icon>

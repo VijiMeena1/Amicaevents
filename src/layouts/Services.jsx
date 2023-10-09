@@ -25,7 +25,7 @@ export default function Services() {
   }, []);
 
   const handleSeeDetails = (title_id) => {
-    navigate(`/service-details/${title_id}/`);
+    navigate(`/details/${title_id}/`);
   };
 
   return (

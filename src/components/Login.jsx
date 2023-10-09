@@ -1,13 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../assets/illustration.svg";
 import { Helmet } from 'react-helmet-async';
 import Google from "../assets/google.svg";
 import Facebook from "../assets/facebook.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useFirebase } from '../FirebaseContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { 
+  signInWithEmailAndPassword, 
+  GoogleAuthProvider, 
+  FacebookAuthProvider, 
+  signInWithPopup 
+} from 'firebase/auth';
+
 export default function Login() {
+  const navigate = useNavigate();
+  const { auth } = useFirebase();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState(null);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+
+      await signInWithEmailAndPassword(auth, email, password);
+
+      toast.success("Signup successful!");
+      navigate('/');
+    } catch (error) {
+      console.error(error.message);
+  
+      setLoginError("Invalid email or password");
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const userCredential = await signInWithPopup(auth, provider);
+
+      navigate('/');
+    } catch (error) {
+      console.error(error.message);
+  
+      setLoginError("Failed to sign in with Google");
+    }
+  };
+
+  const handleFacebookLogin = async () => {
+    const provider = new FacebookAuthProvider();
+
+    try {
+      const userCredential = await signInWithPopup(auth, provider);
+
+      navigate('/');
+    } catch (error) {
+      console.error(error.message);
+
+      setLoginError("Failed to sign in with Facebook");
+    }
+  };
+
   return (
     <div className="py-8 lg:py-20 bg-gray-50">
-            <Helmet>
+      <Helmet>
         <title>Sign In to Your Account</title>
       </Helmet>
       <section>
@@ -20,7 +81,7 @@ export default function Login() {
               <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-3xl mb-6 lg:mb-8">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#">
+              <form className="space-y-4 md:space-y-6" onSubmit={handleLogin}>
                 <div>
                   <label
                     htmlFor="email"
@@ -35,6 +96,8 @@ export default function Login() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#3b82f6] focus:border-[#3b82f6] block w-full p-2.5"
                     placeholder="name@domain.com"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div>
@@ -51,8 +114,25 @@ export default function Login() {
                     placeholder="••••••••"
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#3b82f6] focus:border-[#3b82f6] block w-full p-2.5"
                     required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
+
+  
+                {loginError && (
+                  <div className="flex justify-start mt-3 ml-4 px-1">
+                    <ul>
+                      <li className="flex items-center py-1 gap-2 text-red-500">
+                        <span className="text-lg h-6 w-6 text-center bg-red-100 rounded-full">
+                          <ion-icon name="close"></ion-icon>
+                        </span>
+                        <span>{loginError}</span>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+
                 <div className="flex items-center justify-between">
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
@@ -77,6 +157,7 @@ export default function Login() {
                     Forgot password?
                   </a>
                 </div>
+
                 <button
                   type="submit"
                   className="w-full text-white bg-[#3b82f6] hover:bg-[#2563eb] focus:ring-4 focus:outline-none focus:ring-[#3b82f6] font-medium rounded-lg px-5 py-2.5 text-center"
@@ -85,23 +166,25 @@ export default function Login() {
                 </button>
 
                 <button
-                  type="submit"
+                  type="button" 
                   className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-2 md:py-2.5 text-center"
+                  onClick={handleGoogleLogin}
                 >
                   <div className="flex items-center justify-center gap-2">
                     <span>
-                        <img src={Google} className="h-7 w-7" alt="" />
+                      <img src={Google} className="h-7 w-7" alt="" />
                     </span>
                     <p>Sign in with Google</p>
                   </div>
                 </button>
                 <button
-                  type="submit"
+                  type="button" 
                   className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-2.5 md:py-3.5 text-center"
+                  onClick={handleFacebookLogin}
                 >
                   <div className="flex items-center justify-center gap-2">
                     <span>
-                    <img src={Facebook} className="h-5 w-5" alt="" />
+                      <img src={Facebook} className="h-5 w-5" alt="" />
                     </span>
                     <p>Sign in with Facebook</p>
                   </div>
@@ -110,11 +193,11 @@ export default function Login() {
                 <p className="text-sm font-light text-gray-500">
                   Don’t have an account yet?{"  "}
                   <Link to='/signup'>
-                  <p
-                    className="font-medium inline text-[#3b82f6] hover:underline md:text-base"
-                  >
-                    Sign Up
-                  </p>
+                    <p
+                      className="font-medium inline text-[#3b82f6] hover:underline md:text-base"
+                    >
+                      Sign Up
+                    </p>
                   </Link>
                 </p>
               </form>
@@ -122,6 +205,7 @@ export default function Login() {
           </div>
         </div>
       </section>
+      <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop closeOnClick rtl pauseOnFocusLoss draggable pauseOnHover />
     </div>
   );
 }

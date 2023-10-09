@@ -9,6 +9,8 @@ import Categories from "../components/Categories";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 import Card from "../components/Card";
+import Cart from "../pages/Cart";
+import Profile from "../pages/Profile";
 
 const router = createBrowserRouter([
     {
@@ -41,7 +43,7 @@ const router = createBrowserRouter([
                 element: <Signup/>,
             },
             {
-              path: '/service-details/:title_id',
+              path: '/details/:title_id',
               element:<Card/>, 
               loader: async ({ params }) => {
                 const response = await fetch('/service.json');
@@ -49,6 +51,14 @@ const router = createBrowserRouter([
                 const cardData = data.find((item) => item.title_id === params.title_id);
                 return { data: cardData };
               }
+            },
+            {
+                path: '/cart',
+                element: <Cart/>,
+            },
+            {
+                path: '/profile',
+                element: <Profile/>,
             }
 
         ]
