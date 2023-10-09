@@ -11,6 +11,7 @@ import Signup from "../components/Signup";
 import Card from "../components/Card";
 import Cart from "../pages/Cart";
 import Profile from "../pages/Profile";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
             },
             {
               path: '/details/:title_id',
-              element:<Card/>, 
+              element:<PrivateRoute><Card/></PrivateRoute>, 
               loader: async ({ params }) => {
                 const response = await fetch('/service.json');
                 const data = await response.json();
@@ -54,11 +55,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/cart',
-                element: <Cart/>,
+                element: <PrivateRoute><Cart/></PrivateRoute>,
             },
             {
                 path: '/profile',
-                element: <Profile/>,
+                element:<PrivateRoute><Profile/></PrivateRoute>,
             }
 
         ]

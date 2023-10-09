@@ -193,11 +193,11 @@ export default function Login() {
                 <p className="text-sm font-light text-gray-500">
                   Don’t have an account yet?{"  "}
                   <Link to='/signup'>
-                    <p
+                    <span
                       className="font-medium inline text-[#3b82f6] hover:underline md:text-base"
                     >
                       Sign Up
-                    </p>
+                    </span>
                   </Link>
                 </p>
               </form>

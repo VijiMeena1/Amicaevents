@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useFirebase } from '../FirebaseContext'; 
+
 export default function Profile() {
   const { user } = useFirebase(); 
   const [gallery, setGallery] = useState([]);
@@ -24,7 +25,8 @@ export default function Profile() {
 
   return (
     <>
-      <div className="p-4 mx-5 md:mx-10 lg:mx-20 mt-24 md:mt-32 mb-20 rounded-lg bg-gray-100">
+      <div  data-aos="fade-up"
+     data-aos-duration="3000" className="p-4 mx-5 md:mx-10 lg:mx-20 mt-24 md:mt-32 mb-20 rounded-lg bg-gray-100">
         <div className='flex flex-col items-center justify-center'>
           {user && (
             <>

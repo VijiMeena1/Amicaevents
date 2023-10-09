@@ -45,7 +45,7 @@ export default function Signup() {
 
       toast.success("Signup successful!");
       setTimeout(() => {
-        navigate('/login');
+        navigate('/');
       }, 4000);
 
     } catch (error) {
@@ -59,7 +59,7 @@ export default function Signup() {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       toast.success('Signup with Google successful!');
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       console.error(error.message);
       toast.error('Signup with Google failed. Please try again.');
@@ -71,7 +71,7 @@ export default function Signup() {
       const provider = new FacebookAuthProvider();
       await signInWithPopup(auth, provider);
       toast.success('Signup with Facebook successful!');
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       console.error(error.message);
       toast.error('Signup with Facebook failed. Please try again.');
@@ -200,9 +200,9 @@ export default function Signup() {
               <p className="text-sm font-light text-gray-500 text-center">
                 Already have an account?{"  "}
                 <Link to='/login'>
-                  <p className="font-medium inline text-[#3b82f6] hover:underline md:text-base">
+                  <span className="font-medium inline text-[#3b82f6] hover:underline md:text-base">
                     Log in
-                  </p>
+                  </span>
                 </Link>
               </p>
             </div>

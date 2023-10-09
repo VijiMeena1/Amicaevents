@@ -24,6 +24,7 @@ export const FirebaseProvider = ({ children }) => {
   const value = {
     auth, 
     user,
+    loading
   };
 
   return (
