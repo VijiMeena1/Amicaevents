@@ -8,6 +8,7 @@ import { useFirebase } from '../FirebaseContext';
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { signOut } from 'firebase/auth'; 
 
 export default function Signup() {
   const { auth } = useFirebase();
@@ -16,6 +17,15 @@ export default function Signup() {
   const [displayName, setDisplayName] = useState("");
   const navigate = useNavigate();
   const [passwordError, setPasswordError] = useState(null);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Error signing out:', error.message);
+    }
+  };
+
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -42,10 +52,10 @@ export default function Signup() {
       await updateProfile(userCredential.user, {
         displayName: displayName,
       });
-
+      handleSignOut();
       toast.success("Signup successful!");
       setTimeout(() => {
-        navigate('/');
+        navigate('/login')
       }, 4000);
 
     } catch (error) {
@@ -59,7 +69,8 @@ export default function Signup() {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       toast.success('Signup with Google successful!');
-      navigate('/');
+      handleSignOut();
+      navigate('/login');
     } catch (error) {
       console.error(error.message);
       toast.error('Signup with Google failed. Please try again.');
@@ -71,7 +82,8 @@ export default function Signup() {
       const provider = new FacebookAuthProvider();
       await signInWithPopup(auth, provider);
       toast.success('Signup with Facebook successful!');
-      navigate('/');
+      handleSignOut();
+      navigate('/login');
     } catch (error) {
       console.error(error.message);
       toast.error('Signup with Facebook failed. Please try again.');
