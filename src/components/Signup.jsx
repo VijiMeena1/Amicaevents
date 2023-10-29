@@ -5,10 +5,9 @@ import Google from "../assets/google.svg";
 import Facebook from "../assets/facebook.svg";
 import { Helmet } from 'react-helmet-async';
 import { useFirebase } from '../FirebaseContext';
-import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider , signOut } from 'firebase/auth';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { signOut } from 'firebase/auth'; 
 
 export default function Signup() {
   const { auth } = useFirebase();
