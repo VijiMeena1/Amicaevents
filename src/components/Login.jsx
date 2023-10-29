@@ -3,7 +3,7 @@ import Logo from "../assets/illustration.svg";
 import { Helmet } from 'react-helmet-async';
 import Google from "../assets/google.svg";
 import Facebook from "../assets/facebook.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useFirebase } from '../FirebaseContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,6 +16,7 @@ import {
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { auth } = useFirebase();
 
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ export default function Login() {
       await signInWithEmailAndPassword(auth, email, password);
 
       toast.success("Signup successful!");
-      navigate('/');
+      navigate(location?.state ? location?.state : "/");
     } catch (error) {
       console.error(error.message);
   
@@ -44,7 +45,7 @@ export default function Login() {
     try {
       const userCredential = await signInWithPopup(auth, provider);
 
-      navigate('/');
+      navigate(location?.state ? location?.state : "/");
     } catch (error) {
       console.error(error.message);
   
@@ -58,7 +59,7 @@ export default function Login() {
     try {
       const userCredential = await signInWithPopup(auth, provider);
 
-      navigate('/');
+      navigate(location?.state ? location?.state : "/");
     } catch (error) {
       console.error(error.message);
 

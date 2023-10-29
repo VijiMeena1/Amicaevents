@@ -3,12 +3,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBnCZRKW8uNuUkaABJfTdAmksvvTPec1F0",
-  authDomain: "taste-haven-d0082.firebaseapp.com",
-  projectId: "taste-haven-d0082",
-  storageBucket: "taste-haven-d0082.appspot.com",
-  messagingSenderId: "891528291025",
-  appId: "1:891528291025:web:c75c322f233d32e4975bf0"
+  apiKey: "AIzaSyDiOvw0hYIzp3ziu00C7ErxC45hc2sBz4Q",
+  authDomain: "event-crafthub.firebaseapp.com",
+  projectId: "event-crafthub",
+  storageBucket: "event-crafthub.appspot.com",
+  messagingSenderId: "306536164067",
+  appId: "1:306536164067:web:b06afe29d0642103a173d6"
 };
 
 

@@ -1,6 +1,6 @@
 # "Crafting Unforgettable Experiences: Your Ultimate Event Management Destination"
 
-### Live Link: [Click Here](https://eventcrafthub.web.app)
+## Live Link: [Click Here](https://event-crafthub.web.app/)
 
 # My Website Features and Functionalities
 
