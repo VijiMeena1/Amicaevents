@@ -1,21 +1,18 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAM4PgQkyKEJICy0cst5hR8iKPesxDC2Ss",
-  authDomain: "eventcrafthub.firebaseapp.com",
-  projectId: "eventcrafthub",
-  storageBucket: "eventcrafthub.appspot.com",
-  messagingSenderId: "512105826929",
-  appId: "1:512105826929:web:f1fb2f778289538cba69d0",
-  measurementId: "G-EYFNR2D3NM"
+  apiKey: "AIzaSyBnCZRKW8uNuUkaABJfTdAmksvvTPec1F0",
+  authDomain: "taste-haven-d0082.firebaseapp.com",
+  projectId: "taste-haven-d0082",
+  storageBucket: "taste-haven-d0082.appspot.com",
+  messagingSenderId: "891528291025",
+  appId: "1:891528291025:web:c75c322f233d32e4975bf0"
 };
 
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
 const auth = getAuth(app);
 
