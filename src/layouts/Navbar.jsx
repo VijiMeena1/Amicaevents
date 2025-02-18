@@ -32,7 +32,7 @@ const Navbar = () => {
         <div className='flex flex-1 items-center justify-between'>
         <Link to='/'>
           <span className="text-2xl md:text-3xl font-extrabold cursor-pointer">
-            EventCraft<span className='text-[#00A4EF]'>Hub</span>
+            Amica Event <span className='text-[#00A4EF]'>Hub</span>
           </span>
         </Link>
         {user ? (

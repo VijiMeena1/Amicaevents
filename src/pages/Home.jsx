@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div>
       <Helmet>
-        <title>Home - EventCraftHub - Your Ultimate Event Management Destination</title>
+        <title>Home - Amica Events - Your Ultimate Event Management Destination</title>
       </Helmet>
       <Carousels/>
       <Categories/>
