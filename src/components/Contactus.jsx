@@ -41,7 +41,7 @@ export default function Contactus() {
                 Our friendly team is here to help.
               </p>
               <p className="mt-2 text-sm text-blue-500">
-                hello@example.com
+              amicaeventhub1@gmail.com
               </p>
             </div>
 
@@ -105,7 +105,7 @@ export default function Contactus() {
                 Come say hello at our office HQ.
               </p>
               <p className="mt-2 text-sm text-blue-500">
-                100 Smith Street, VIC 3066 AU
+              No.4, Yamuna Street,Velachery
               </p>
             </div>
 
@@ -132,7 +132,7 @@ export default function Contactus() {
               <p className="mt-2 text-sm text-gray-500">
                 Mon-Fri from 8am to 5pm.
               </p>
-              <p className="mt-2 text-sm text-blue-500">+88 (010) 0000-0000</p>
+              <p className="mt-2 text-sm text-blue-500">+91 9003851079</p>
             </div>
           </div>
 

@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="flex flex-col items-center justify-center gap-8 md:gap-12 py-12 md:py-20 lg:py-24 px-5">
           <div>
             <p className="text-center font-bold text-3xl md:text-5xl text-white font-serif">
-              Amica Event<span className="text-[#00A4EF]">Hub</span>
+              Amica <span className="text-[#00A4EF]">Event</span>
             </p>
           </div>
           <div>
@@ -68,7 +68,7 @@ export default function Footer() {
             </ul>
           </div>
           <span className="text-center text-white">
-            © 2023 Amica Event. All Rights Reserved.
+            © 2025 Amica Event. All Rights Reserved.
           </span>
             </div>
 
