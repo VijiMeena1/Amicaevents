@@ -20,7 +20,7 @@ const Callus = () => {
       <div className='flex items-center justify-center gap-5'>
         {/* ✅ WhatsApp Button */}
         <a 
-          href="https://wa.me/9003851079" 
+          href="https://wa.me/+919003851079" 
           target="_blank" 
           rel="noopener noreferrer"
           className="border-2 rounded-[40px] text-base lg:text-lg py-2 lg:py-3 bg-[#12121259] px-6 md:px-8 text-center border-white text-white font-semibold hover:bg-[#00A4EF] hover:border-[#00A4EF] focus:outline-none uppercase"
@@ -35,7 +35,7 @@ const Callus = () => {
 
         {/* ✅ Call Button */}
         <a 
-          href="tel:+9003851079"
+          href="tel:+919003851079"
           className="border-2 rounded-[40px] text-base lg:text-lg py-2 lg:py-3 bg-[#12121259] px-6 md:px-8 text-center border-white text-white font-semibold hover:bg-[#00A4EF] hover:border-[#00A4EF] focus:outline-none uppercase"
         >
           <div className='flex items-center justify-center gap-2'>
