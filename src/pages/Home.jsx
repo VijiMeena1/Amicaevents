@@ -1,11 +1,11 @@
-import React from 'react'
-import { Helmet } from 'react-helmet-async'
-import Carousels from '../components/Carousels'
-import Contactus from '../components/Contactus'
-import Callus from '../components/Callus'
-import Services from '../layouts/Services'
-import Categories from '../components/Categories'
-import Newsletter from '../layouts/Newsletter'
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
+import Carousels from '../components/Carousels';
+import Contactus from '../components/Contactus';
+import Callus from '../components/Callus';
+import Services from '../layouts/Services';
+import Categories from '../components/Categories';
+import Newsletter from '../layouts/Newsletter';
 
 export default function Home() {
   return (
@@ -13,12 +13,14 @@ export default function Home() {
       <Helmet>
         <title>Home - Amica Events - Your Ultimate Event Management Destination</title>
       </Helmet>
-      <Carousels/>
-      <Categories/>
-      <Callus/>
-      <Services/>
-      <Newsletter/>
-      <Contactus/>
+      
+      {/* Ensure each component is implemented correctly */}
+      <Carousels />
+      <Categories />
+      <Callus />
+      <Services />
+      <Newsletter />
+      <Contactus />
     </div>
-  )
+  );
 }
