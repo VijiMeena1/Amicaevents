@@ -1,10 +1,15 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import getPort from 'get-port'; // Import get-port for dynamic port selection
 
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 3000, // Keep the port as 3000
-    strictPort: true // Ensures Vite doesn't switch to another port if 3000 is unavailable
-  }
+export default defineConfig(async () => {
+  // Try to find an available port starting from 3000
+  const port = await getPort({ port: 3000 });
+
+  return {
+    plugins: [react()],
+    server: {
+      port: port, // Set the server port dynamically
+    },
+  };
 });
