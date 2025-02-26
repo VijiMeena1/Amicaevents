@@ -1,15 +1,20 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import getPort from 'get-port'; // Import get-port for dynamic port selection
+import getPort from 'get-port';
+import path from 'path'; // Import path module
 
 export default defineConfig(async () => {
-  // Try to find an available port starting from 3000
   const port = await getPort({ port: 3000 });
 
   return {
     plugins: [react()],
     server: {
-      port: port, // Set the server port dynamically
+      port: port,
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'), // Make "@/assets" point to "src/assets"
+      },
     },
   };
 });
