@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useFirebase } from '../FirebaseContext';
 import { signOut } from 'firebase/auth';
+import { IoMenu, IoClose } from "react-icons/io5"; // ✅ Replacing ion-icons
 
 const Navbar = () => {
   const { user, auth } = useFirebase();
   const [menuVisible, setMenuVisible] = useState(false);
 
-  const toggleMenu = () => setMenuVisible((prev) => !prev);
-
+  const toggleMenu = () => setMenuVisible(!menuVisible);
   const closeMenu = () => setMenuVisible(false);
 
   const handleSignOut = async () => {
@@ -22,11 +22,11 @@ const Navbar = () => {
 
   const UserInfo = () => (
     <div className="flex items-center gap-3 mx-3">
-      <p className="text-sm md:text-base lg:text-lg">{user.displayName}</p>
+      <p className="text-sm md:text-base lg:text-lg">{user?.displayName}</p>
       <img 
         className="h-10 w-10 rounded-full" 
-        src={user.photoURL || "https://i.ibb.co/HzrsZjz/man.png"} 
-        alt={user.displayName || "User Avatar"} 
+        src={user?.photoURL || "https://i.ibb.co/HzrsZjz/man.png"} 
+        alt={user?.displayName || "User Avatar"} 
       />
     </div>
   );
@@ -40,40 +40,40 @@ const Navbar = () => {
 
         {user && <div className="lg:hidden"><UserInfo /></div>}
 
-        {/* Mobile Menu Button */}
+        {/* ✅ Mobile Menu Button (Replaced ion-icon) */}
         <button 
-          className="text-3xl cursor-pointer -mr-2 md:mx-2 lg:hidden" 
+          className="text-3xl cursor-pointer lg:hidden" 
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
-          <ion-icon name={menuVisible ? 'close' : 'menu'}></ion-icon>
+          {menuVisible ? <IoClose /> : <IoMenu />}
         </button>
       </div>
 
-      {/* Navigation Links */}
-      <ul 
-        className={`lg:flex lg:items-center absolute lg:static bg-white w-full lg:w-auto left-0 lg:opacity-100 
-          transition-all duration-300 ease-in-out 
-          ${menuVisible ? 'opacity-100 top-[75px] border-t-2 lg:border-0' : 'opacity-0 top-[-400px]'}
+      {/* ✅ Navigation Links */}
+      <ul className={`lg:flex lg:items-center absolute lg:static bg-white w-full lg:w-auto left-0 transition-all duration-300 ease-in-out 
+          ${menuVisible ? 'block top-[75px] border-t-2 lg:border-0' : 'hidden'}
         `}
       >
-        {["Home", "Categories", "Services", "Contact"].map((item) => (
-          <NavLink 
-            key={item} 
-            onClick={closeMenu} 
-            to={`/${item.toLowerCase()}`} 
-            className={({ isActive }) => isActive ? "active" : ""}
-          >
-            <li className="mx-4 my-4 text-lg xl:text-xl hover:text-cyan-500 duration-500">{item}</li>
-          </NavLink>
-        ))}
+        <NavLink to="/" onClick={closeMenu} className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : ""}>
+          <li className="mx-4 my-4 text-lg xl:text-xl hover:text-cyan-500 duration-500">Home</li>
+        </NavLink>
+        <NavLink to="/categories" onClick={closeMenu} className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : ""}>
+          <li className="mx-4 my-4 text-lg xl:text-xl hover:text-cyan-500 duration-500">Categories</li>
+        </NavLink>
+        <NavLink to="/services" onClick={closeMenu} className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : ""}>
+          <li className="mx-4 my-4 text-lg xl:text-xl hover:text-cyan-500 duration-500">Services</li>
+        </NavLink>
+        <NavLink to="/contactus" onClick={closeMenu} className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : ""}>
+          <li className="mx-4 my-4 text-lg xl:text-xl hover:text-cyan-500 duration-500">Contact</li>
+        </NavLink>
 
         {user ? (
           <>
-            <NavLink onClick={closeMenu} to="/cart" className={({ isActive }) => isActive ? "active" : ""}>
+            <NavLink to="/cart" onClick={closeMenu} className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : ""}>
               <li className="mx-4 my-4 text-lg xl:text-xl hover:text-cyan-500 duration-500">Cart</li>
             </NavLink>
-            <NavLink onClick={closeMenu} to="/profile" className={({ isActive }) => isActive ? "active" : ""}>
+            <NavLink to="/profile" onClick={closeMenu} className={({ isActive }) => isActive ? "text-blue-600 font-semibold" : ""}>
               <li className="mx-4 my-4 text-lg xl:text-xl hover:text-cyan-500 duration-500">Profile</li>
             </NavLink>
 
@@ -87,7 +87,7 @@ const Navbar = () => {
             </button>
           </>
         ) : (
-          <NavLink onClick={closeMenu} to="/login">
+          <NavLink to="/login" onClick={closeMenu}>
             <button className="bg-cyan-400 text-white duration-500 px-6 text-lg py-2 mx-4 hover:bg-cyan-500 rounded-lg mb-4 lg:mb-0">
               Login
             </button>

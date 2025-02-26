@@ -1,9 +1,9 @@
+// src/routes/Routes.jsx
 import { createBrowserRouter } from "react-router-dom";
-
 import Root from "../pages/Root";
 import Home from "../pages/Home";
 import ErrorPage from "../components/Errorpage";
-import Contactus from "../components/Contactus"; // Make sure this points to the correct path
+import Contactus from "../components/Contactus";
 import Services from "../layouts/Services";
 import Categories from "../components/Categories";
 import Login from "../components/Login";
@@ -11,58 +11,39 @@ import Signup from "../components/Signup";
 import Card from "../components/Card";
 import Cart from "../pages/Cart";
 import Profile from "../pages/Profile";
-import PrivateRoute from "./PrivateRoute";
+import PrivateRoute from "../routes/PrivateRoute"; // ✅ Fixed import path
 
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: "/",
         element: <Root />,
-        errorElement: <ErrorPage />, 
+        errorElement: <ErrorPage />,
         children: [
+            { path: "/", element: <Home /> },
+            { path: "/contactus", element: <Contactus /> }, // ✅ Ensured consistency
+            { path: "/services", element: <Services /> },
+            { path: "/categories", element: <Categories /> },
+            { path: "/login", element: <Login /> },
+            { path: "/signup", element: <Signup /> },
             {
-                path: '/',
-                element: <Home />,
-            },
-            {
-                path: '/contactus', // This is the route for the Contactus component
-                element: <Contactus />,
-            },
-            {
-                path: '/services',
-                element: <Services />,
-            },
-            {
-                path: '/categories',
-                element: <Categories />,
-            },
-            {
-                path: '/login',
-                element: <Login />,
-            },
-            {
-                path: '/signup',
-                element: <Signup />,
-            },
-            {
-                path: '/details/:title_id',
-                element: <PrivateRoute><Card /></PrivateRoute>, 
+                path: "/details/:title_id",
+                element: <PrivateRoute><Card /></PrivateRoute>,
                 loader: async ({ params }) => {
-                    const response = await fetch('/service.json');
-                    const data = await response.json();
-                    const cardData = data.find((item) => item.title_id === params.title_id);
-                    return { data: cardData };
+                    try {
+                        const response = await fetch("/service.json");
+                        if (!response.ok) throw new Error("Failed to fetch data");
+                        const data = await response.json();
+                        return { data: data.find(item => item.title_id === params.title_id) };
+                    } catch (error) {
+                        console.error("Error loading data:", error);
+                        return { data: null };
+                    }
                 }
             },
-            {
-                path: '/cart',
-                element: <PrivateRoute><Cart /></PrivateRoute>,
-            },
-            {
-                path: '/profile',
-                element: <PrivateRoute><Profile /></PrivateRoute>,
-            }
+            { path: "/cart", element: <PrivateRoute><Cart /></PrivateRoute> },
+            { path: "/profile", element: <PrivateRoute><Profile /></PrivateRoute> }
         ]
-    }    
+    }
 ]);
 
-export default router;   
+export default router;
