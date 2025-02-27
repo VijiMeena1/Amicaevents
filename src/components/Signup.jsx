@@ -1,227 +1,142 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../assets/login.svg";
-import Google from "../assets/google.svg";
-import Facebook from "../assets/facebook.svg";
-import { Helmet } from 'react-helmet-async';
-import { useFirebase } from '../FirebaseContext';
-import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider , signOut } from 'firebase/auth';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { createClient } from "@supabase/supabase-js";
+import { Eye, EyeOff } from "lucide-react"; // Icons for password visibility
+import illustration from "@/assets/login.svg";  // Use login.svg instead of illustration.svg
+import googleIcon from "@/assets/google.svg";
+
+const supabase = createClient(
+  "https://nmddffdndgincdaifdqr.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5tZGRmZmRuZGdpbmNkYWlmZHFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAyNDM1MDYsImV4cCI6MjA1NTgxOTUwNn0.A2iJgxUK2gOoOZCn00gupMMoIwSNMF3C_Ycbdl6QZ50"
+);
 
 export default function Signup() {
-  const { auth } = useFirebase();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const [passwordError, setPasswordError] = useState(null);
 
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error('Error signing out:', error.message);
-    }
-  };
-
-
+  // Email + Password Signup
   const handleSignup = async (e) => {
     e.preventDefault();
-
+    setError("");
 
     if (password.length < 6) {
-      setPasswordError("Password must be at least 6 characters long.");
+      setError("Password must be at least 6 characters.");
       return;
     }
 
-    if (!/[A-Z]/.test(password)) {
-      setPasswordError("Password must contain at least one capital letter.");
-      return;
-    }
+    const { user, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { full_name: displayName } },
+    });
 
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      setPasswordError("Password must contain at least one special character.");
-      return;
-    }
-
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      
-      await updateProfile(userCredential.user, {
-        displayName: displayName,
-      });
-      handleSignOut();
-      toast.success("Signup successful!");
-      setTimeout(() => {
-        navigate('/login')
-      }, 4000);
-
-    } catch (error) {
-      console.error(error.message);
-      toast.error(`Signup failed.${error.message}`);
+    if (error) {
+      setError(error.message);
+    } else {
+      console.log("Signup successful:", user);
+      navigate("/login");
     }
   };
 
+  // Google OAuth Signup
   const handleGoogleSignup = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
-      toast.success('Signup with Google successful!');
-      handleSignOut();
-      navigate('/login');
-    } catch (error) {
-      console.error(error.message);
-      toast.error('Signup with Google failed. Please try again.');
-    }
-  };
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: "https://amicaevents.vercel.app/auth/callback" },
+    });
 
-  const handleFacebookSignup = async () => {
-    try {
-      const provider = new FacebookAuthProvider();
-      await signInWithPopup(auth, provider);
-      toast.success('Signup with Facebook successful!');
-      handleSignOut();
-      navigate('/login');
-    } catch (error) {
-      console.error(error.message);
-      toast.error('Signup with Facebook failed. Please try again.');
+    if (error) {
+      setError(error.message);
     }
   };
 
   return (
-    <div className="py-8 lg:py-20 bg-gray-50">
-      <Helmet>
-        <title>Start Your Journey with Us: Sign Up</title>
-      </Helmet>
-      <section>
-        <div className="flex md:gap-12 gap-16 items-center justify-center px-6 py-4 md:py-8 mx-auto lg:py-0">
-          <div className="hidden md:inline-block">
-            <img className="h-[591px] w-[608px]" src={Logo} alt="logo" />
+    <div className="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gray-100">
+      {/* Signup Card */}
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md md:w-1/2">
+        <h2 className="text-2xl font-bold text-center mb-6">Create an account</h2>
+
+        {error && <p className="text-red-500 text-sm text-center mb-4">{error}</p>}
+
+        {/* Email + Password Form */}
+        <form onSubmit={handleSignup} className="mb-4">
+          <div className="mb-4">
+            <label className="block text-gray-600 text-sm mb-2">Your Name</label>
+            <input
+              type="text"
+              placeholder="John Doe"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              required
+            />
           </div>
-          <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-3xl mb-6 lg:mb-8">
-                Create an account
-              </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={handleSignup}>
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Your Name
-                  </label>
-                  <input
-                    type="name"
-                    name="name"
-                    id="name"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#3b82f6] focus:border-[#3b82f6] block w-full p-2.5"
-                    placeholder="John Smith"
-                    value={displayName}
-                    onChange={(e) => setDisplayName(e.target.value)}
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#3b82f6] focus:border-[#3b82f6] block w-full p-2.5"
-                    placeholder="name@domain.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-[#3b82f6] focus:border-[#3b82f6] block w-full p-2.5"
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                      setPasswordError(null); 
-                    }}
-                    required
-                  />
-                </div>
 
-                {passwordError && (
-                  <div className="flex justify-start mt-3 ml-4 px-1">
-                    <ul>
-                      <li className="flex items-center py-1 gap-3 text-red-500">
-                        <span className="text-lg h-6 w-6 text-center bg-red-100 rounded-full">
-                          <ion-icon name="close"></ion-icon>
-                        </span>
-                        <span className="text-sm md:text-base">{passwordError}</span>
-                      </li>
-                    </ul>
-                  </div>
-                )}
+          <div className="mb-4">
+            <label className="block text-gray-600 text-sm mb-2">Your email</label>
+            <input
+              type="email"
+              placeholder="name@domain.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              required
+            />
+          </div>
 
-                <button
-                  type="submit"
-                  className="w-full text-white bg-[#3b82f6] hover:bg-[#2563eb] focus:ring-4 focus:outline-none focus:ring-[#3b82f6] font-medium rounded-lg px-5 py-2.5 text-center"
-                >
-                  Sign Up
-                </button>
-                
-                <button
-                  type="button"
-                  onClick={handleGoogleSignup}
-                  className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-2 md:py-2.5 text-center"
-                >
-                  <div className="flex items-center justify-center gap-2">
-                    <span>
-                      <img src={Google} className="h-7 w-7" alt="" />
-                    </span>
-                    <p>Sign up with Google</p>
-                  </div>
-                </button>
-                <button
-                  type="button"
-                  onClick={handleFacebookSignup}
-                  className="w-full text-sm hover:bg-gray-200 focus:ring-4 border-2 border-gray-200 font-medium rounded-lg px-5 py-2.5 md:py-3.5 text-center"
-                >
-                  <div className="flex items-center justify-center gap-2">
-                    <span>
-                      <img src={Facebook} className="h-5 w-5" alt="" />
-                    </span>
-                    <p>Sign up with Facebook</p>
-                  </div>
-                </button>
-              </form>
-              <p className="text-sm font-light text-gray-500 text-center">
-                Already have an account?{"  "}
-                <Link to='/login'>
-                  <span className="font-medium inline text-[#3b82f6] hover:underline md:text-base">
-                    Log in
-                  </span>
-                </Link>
-              </p>
+          {/* Password Input with Eye Icon */}
+          <div className="mb-4 relative">
+            <label className="block text-gray-600 text-sm mb-2">Password</label>
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="********"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg pr-10"
+                required
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
             </div>
           </div>
-        </div>
-      </section>
 
-      <ToastContainer position="top-center" autoClose={3000}/>
+          <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+            Sign up
+          </button>
+        </form>
+
+        {/* Google OAuth Signup */}
+        <button
+          onClick={handleGoogleSignup}
+          className="w-full flex items-center justify-center bg-white border border-gray-300 py-2 rounded-lg shadow-sm hover:bg-gray-100"
+        >
+          <img src={googleIcon} alt="Google" className="h-5 mr-2" />
+          Sign up with Google
+        </button>
+
+        {/* Login Link */}
+        <p className="text-sm font-light text-gray-500 text-center mt-4">
+          Already have an account?{" "}
+          <Link to="/login" className="font-medium text-blue-500 hover:underline">
+            Sign in
+          </Link>
+        </p>
+      </div>
+
+      {/* Right Side Illustration (Hidden on Small Screens) */}
+      <div className="hidden md:flex w-1/2 justify-center">
+        <img src={illustration} alt="Signup Illustration" className="w-full max-w-md" />
+      </div>
     </div>
   );
 }
