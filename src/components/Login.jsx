@@ -15,9 +15,11 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState(null);
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async (e) => {
+  // Email + Password Login
+  const handleEmailLogin = async (e) => {
     e.preventDefault();
     try {
         await signInWithPassword(email, password);
