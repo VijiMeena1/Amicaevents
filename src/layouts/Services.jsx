@@ -28,7 +28,7 @@ export default function Services() {
     navigate(`/details/${title_id}/`);
   };
 
-  return (
+    return (
     <section className="bg-white lg:mt-5">
       <div className="container px-6 py-10 mx-auto">
         <div>
@@ -75,12 +75,14 @@ export default function Services() {
                         {service.price}
                       </a>
                     </div>
-                    <button
-                      onClick={() => handleSeeDetails(service.title_id)}
-                      className="px-6 py-3 text-sm lg:text-base font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-                    >
-                      See Details
-                    </button>
+                    <div className="flex space-x-2">
+                      <button
+                        onClick={() => handleSeeDetails(service.title_id)}
+                        className="px-4 py-2 text-sm lg:text-base font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                      >
+                        See Details
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
