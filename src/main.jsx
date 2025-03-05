@@ -5,16 +5,16 @@ import './index.css';
 import router from './routes/Routes.jsx';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from "@material-tailwind/react";
-import { FirebaseProvider } from './FirebaseContext'; 
+import { AuthProvider } from './SupabaseContext';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <FirebaseProvider>
+    <AuthProvider>
       <ThemeProvider>
         <HelmetProvider>
           <RouterProvider router={router} />
         </HelmetProvider>
       </ThemeProvider>
-    </FirebaseProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
