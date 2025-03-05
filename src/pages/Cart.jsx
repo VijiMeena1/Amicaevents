@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Cart() {
+  const [cartItems, setCartItems] = useState([]);
 
-  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartItems(storedCart);
+  }, []);
+
+  const handleRemoveFromCart = (index) => {
+    const updatedCart = [...cartItems.slice(0, index), ...cartItems.slice(index + 1)];
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    setCartItems(updatedCart); // Update state instead of reloading the page
+  };
 
   return (
     <div className="p-4 px-3 md:px-10 lg:px-20 mx-auto my-8 lg:mt-16" data-aos="zoom-in-up" data-aos-duration="2000">
@@ -34,7 +44,7 @@ export default function Cart() {
         <div className="px-4 md:px-6 py-6 md:py-8 bg-gray-200 rounded-b-lg">
           <div className="flex justify-between items-center">
             <span className="font-bold text-lg md:text-xl xl:text-2xl">Total:</span>
-            <span className="font-bold text-lg md:text-xl xl:text-2xl lg:pr-5">${calculateTotal(cartItems)}</span>
+            <span className="font-bold text-lg md:text-xl xl:text-2xl lg:pr-5">₹{calculateTotal(cartItems)}</span>
           </div>
           <button className="block w-full mt-4 bg-[#00A4EF] hover:bg-[#0989c9] md:text-lg lg:text-xl text-white font-bold py-2.5 lg:py-3.5 rounded">
             Checkout
@@ -46,13 +56,8 @@ export default function Cart() {
 }
 
 const calculateTotal = (cartItems) => {
-  return cartItems.reduce((total, item) => total + parseFloat(item.price.replace('$', '')), 0).toFixed(2);
-};
-
-
-const handleRemoveFromCart = (index) => {
-  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-  const updatedCart = [...cartItems.slice(0, index), ...cartItems.slice(index + 1)];
-  localStorage.setItem('cart', JSON.stringify(updatedCart));
-  window.location.reload();
+  return cartItems.reduce((total, item) => {
+    let price = parseFloat(item.price.replace(/[^\d.]/g, '')) || 0;
+    return total + price;
+  }, 0).toFixed(2);
 };
