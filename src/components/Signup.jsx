@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../SupabaseContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../SupabaseClient";
 
 export default function Signup() {
   const navigate = useNavigate();

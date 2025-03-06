@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { supabase } from '../supabaseClient'; // Import Supabase client
+import { supabase } from '../SupabaseClient'; // Import Supabase client
 import { IoMenu, IoClose } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
 
