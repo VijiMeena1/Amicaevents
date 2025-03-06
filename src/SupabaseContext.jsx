@@ -1,19 +1,20 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from './supabaseClient';
+import { supabase } from './SupabaseClient';
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // ✅ Added loading state
+  const [loading, setLoading] = useState(true); // ✅ Added loading state to avoid flickering
 
   useEffect(() => {
     const fetchUser = async () => {
+      setLoading(true);
       const { data: { session }, error } = await supabase.auth.getSession();
       if (error) console.error("Error fetching session:", error);
 
       setUser(session?.user || null);
-      setLoading(false); // ✅ Ensure loading state is updated
+      setLoading(false);
     };
 
     fetchUser();
@@ -44,7 +45,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={{ user, loading, signUpWithEmail, signInWithPassword, logout }}>
-      {!loading ? children : <p>Loading...</p>} {/* ✅ Prevents premature redirects */}
+      {loading ? <p>Loading...</p> : children} {/* ✅ Prevents flickering */}
     </AuthContext.Provider>
   );
 }
