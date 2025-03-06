@@ -12,6 +12,7 @@ import Card from "../components/Card";
 import Cart from "../pages/Cart";
 import Profile from "../pages/Profile";
 import PrivateRoute from "../routes/PrivateRoute"; // ✅ Fixed import path
+import SelectVenue from "../pages/SelectVenue";
 
 const router = createBrowserRouter([
     {
@@ -20,14 +21,17 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { path: "/", element: <Home /> },
+            { path: "/home", element: <Home /> },
+            { path: "/contact", element: <Contactus /> }, 
             { path: "/contactus", element: <Contactus /> }, // ✅ Ensured consistency
             { path: "/services", element: <Services /> },
+            { path: "/select-venue/:title_id", element: <SelectVenue/> },
             { path: "/categories", element: <Categories /> },
             { path: "/login", element: <Login /> },
             { path: "/signup", element: <Signup /> },
             {
                 path: "/details/:title_id",
-                element: <PrivateRoute><Card /></PrivateRoute>,
+                element: <Card />,
                 loader: async ({ params }) => {
                     try {
                         const response = await fetch("/service.json");

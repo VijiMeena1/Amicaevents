@@ -1,10 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { useFirebase } from '../FirebaseContext'; 
+import { supabase } from '../supabaseClient';
 
 export default function Profile() {
-  const { user } = useFirebase(); 
+  const [user, setUser] = useState(null);
   const [gallery, setGallery] = useState([]);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession(); // Get session instead of getUser()
+      if (session?.user) {
+        setUser(session.user); // Only set user if session exists
+      }
+    };
+  
+    fetchUser();
+  
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user || null);
+    });
+  
+    return () => authListener.subscription.unsubscribe();
+  }, []);
+
+  // Fetch Gallery Data
   useEffect(() => {
     const fetchGallery = async () => {
       try {
@@ -25,18 +43,18 @@ export default function Profile() {
 
   return (
     <>
-      <div  data-aos="fade-up"
-     data-aos-duration="3000" className="p-4 mx-5 md:mx-10 lg:mx-20 mt-24 md:mt-32 mb-20 rounded-lg bg-gray-100">
+      <div data-aos="fade-up" data-aos-duration="3000"
+        className="p-4 mx-5 md:mx-10 lg:mx-20 mt-24 md:mt-32 mb-20 rounded-lg bg-gray-100">
         <div className='flex flex-col items-center justify-center'>
           {user && (
             <>
               <img
                 className='rounded-full shadow-xl -mt-20 h-40 w-40 md:h-48 md:w-48 object-cover mb-8'
-                src={user?.photoURL || 'https://i.ibb.co/HzrsZjz/man.png'}
-                alt=""
+                src={user?.user_metadata?.avatar_url || 'https://img.icons8.com/?size=100&id=tZuAOUGm9AuS&format=png&color=000000'}
+                alt="User Avatar"
               />
-              <h2 className='text-2xl md:text-3xl font-semibold mb-1 md:mb-2'>{user.displayName}</h2>
-              <p className='italic text-lg text-gray-700 mb-5 lg:mb-6'>{user.email}</p>
+              <h2 className='text-2xl md:text-3xl font-semibold mb-1 md:mb-2'>{user?.user_metadata?.name || 'User'}</h2>
+              <p className='italic text-lg text-gray-700 mb-5 lg:mb-6'>{user?.email}</p>
               <div className='border-b-2 border-gray-600 w-[90%] opacity-20'></div>
             </>
           )}
@@ -48,9 +66,9 @@ export default function Profile() {
         </div>
         <div className='flex items-center justify-center mx-5 md:mx-8 mb-10 lg:mb-14'>
           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10'>
-            {gallery.map((gallery, index) => (
+            {gallery.map((img, index) => (
               <div key={index} className='h-60 w-60 shadow'>
-                <img className='object-cover h-60 w-60' src={gallery} alt={`gallery-${index}`} />
+                <img className='object-cover h-60 w-60' src={img} alt={`gallery-${index}`} />
               </div>
             ))}
           </div>

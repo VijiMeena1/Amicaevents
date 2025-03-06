@@ -1,24 +1,14 @@
 import React from 'react';
-import { useFirebase } from '../FirebaseContext';
+import { useAuth } from '../SupabaseContext';
 import { Navigate, useLocation } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useFirebase();
+  const { user, loading } = useAuth();
   const location = useLocation();
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <span className="loading loading-infinity loading-lg text-blue-500"></span>
-      </div>
-    );
-  }
+  if (loading) return <p>Loading...</p>; // ✅ Prevents premature redirection
 
-  if (!user) {
-    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
-  }
-
-  return children;
+  return user ? children : <Navigate to="/login" state={{ from: location.pathname }} replace />;
 };
 
 export default PrivateRoute;
