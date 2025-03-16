@@ -1,4 +1,3 @@
-// src/routes/Routes.jsx
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../pages/Root";
 import Home from "../pages/Home";
@@ -13,6 +12,9 @@ import Cart from "../pages/Cart";
 import Profile from "../pages/Profile";
 import PrivateRoute from "../routes/PrivateRoute"; // ✅ Fixed import path
 import SelectVenue from "../pages/SelectVenue";
+import Checkout from "../pages/Checkout";
+// import OrderConfirmation from "../pages/OrderConfirmation";
+import OrderSuccess from "../pages/OrderSuccess";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +28,9 @@ const router = createBrowserRouter([
             { path: "/contactus", element: <Contactus /> }, // ✅ Ensured consistency
             { path: "/services", element: <Services /> },
             { path: "/select-venue/:title_id", element: <SelectVenue/> },
+            { path: "/checkout", element: <Checkout />},
+            // { path: "/order-confirmation", element:<OrderConfirmation />},
+            { path: "/order-success", element: <OrderSuccess />},
             { path: "/categories", element: <Categories /> },
             { path: "/login", element: <Login /> },
             { path: "/signup", element: <Signup /> },
